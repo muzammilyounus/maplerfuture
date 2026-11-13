@@ -1,0 +1,1278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maple Future Institution | Teaching Platform</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter & Caveat for Tagline -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            maple: {
+              50: '#fff1f2',
+              100: '#ffe4e6',
+              500: '#e11d48',
+              600: '#C41E3A', // Official Maple Crimson
+              700: '#9f1239',
+              800: '#881337',
+            },
+            navy: {
+              900: '#1A2332',
+              800: '#232E40',
+              700: '#2D3B52',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            script: ['Caveat', 'cursive']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Custom Scrollbars */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+  </style>
+</head>
+<body class="bg-[#F5F7FA] text-slate-800 font-sans antialiased min-h-screen flex flex-col selection:bg-maple-600 selection:text-white">
+
+  <!-- ================= TOP HEADER NAV ================= -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        
+        <!-- Left Section: Logo & Explore Dropdown -->
+        <div class="flex items-center space-x-6">
+          <!-- Maple Future Logo -->
+          <a href="#" onclick="switchTrack('k12')" class="flex items-center space-x-3 group">
+            <svg class="w-12 h-12 text-maple-600 transition-transform group-hover:scale-105" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Maple Leaf with Open Book & Figures -->
+              <path d="M100 15 L118 55 L135 48 L130 75 L158 68 L148 95 L175 108 L145 125 L152 145 L120 135 L100 178 L80 135 L48 145 L55 125 L25 108 L52 95 L42 68 L70 75 L65 48 L82 55 Z" fill="#C41E3A" />
+              <path d="M65 85 C65 75, 75 70, 85 75 M135 85 C135 75, 125 70, 115 75" stroke="white" stroke-width="4" stroke-linecap="round"/>
+              <circle cx="100" cy="52" r="7" fill="white"/>
+              <circle cx="82" cy="72" r="5" fill="white"/>
+              <circle cx="118" cy="72" r="5" fill="white"/>
+              <path d="M100 62 Q90 90 78 108 Q100 102 122 108 Q110 90 100 62 Z" fill="white"/>
+              <!-- Book Base -->
+              <path d="M38 142 Q100 120 100 152 Q100 120 162 142 L162 154 Q100 132 100 164 Q100 132 38 154 Z" fill="#881337"/>
+              <path d="M42 148 Q100 128 100 158 Q100 128 158 148 L158 152 Q100 132 100 160 Q100 132 42 152 Z" fill="white"/>
+            </svg>
+            <div class="flex flex-col">
+              <span class="text-xl font-extrabold tracking-tight text-navy-900 leading-tight">Maple Future</span>
+              <span class="text-[10px] tracking-[0.25em] font-bold text-slate-500 uppercase border-t border-slate-200 pt-0.5 mt-0.5">INSTITUTION</span>
+            </div>
+          </a>
+
+          <!-- Coursera-style Explore Dropdown -->
+          <div class="relative hidden lg:block">
+            <button onclick="toggleExploreMenu()" class="px-4 py-2 text-sm font-semibold text-white bg-maple-600 hover:bg-maple-700 rounded-md transition flex items-center gap-2">
+              <span>Explore</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            </button>
+            
+            <div id="explore-menu" class="hidden absolute top-full left-0 mt-2 w-80 bg-white rounded-lg shadow-xl border border-slate-200 py-3 z-50">
+              <div class="px-4 py-2 border-b border-slate-100 text-xs font-bold text-slate-400 uppercase tracking-wider">Browse by Track</div>
+              <a href="#" onclick="switchTrack('k12'); toggleExploreMenu();" class="flex items-center px-4 py-3 hover:bg-slate-50 transition">
+                <div class="w-8 h-8 rounded-full bg-rose-100 text-maple-600 flex items-center justify-center font-bold text-sm mr-3">K</div>
+                <div>
+                  <div class="text-sm font-semibold text-slate-800">K-12 & Youth Academy</div>
+                  <div class="text-xs text-slate-500">Elementary & High School STEM, Math, AI</div>
+                </div>
+              </a>
+              <a href="#" onclick="switchTrack('pro'); toggleExploreMenu();" class="flex items-center px-4 py-3 hover:bg-slate-50 transition">
+                <div class="w-8 h-8 rounded-full bg-navy-900 text-white flex items-center justify-center font-bold text-sm mr-3">U</div>
+                <div>
+                  <div class="text-sm font-semibold text-slate-800">Higher Ed & Professionals</div>
+                  <div class="text-xs text-slate-500">College, Uni Graduates & Tech Leadership</div>
+                </div>
+              </a>
+              <div class="px-4 py-2 border-t border-b border-slate-100 text-xs font-bold text-slate-400 uppercase tracking-wider mt-2">Popular Subjects</div>
+              <a href="#" onclick="filterByTag('Python'); toggleExploreMenu();" class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-50">Python & Coding Lab</a>
+              <a href="#" onclick="filterByTag('AI Essentials'); toggleExploreMenu();" class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-50">AI & LLM Engineering</a>
+              <a href="#" onclick="filterByTag('Finance'); toggleExploreMenu();" class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-50">Business & Corporate Finance</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Middle: Search Bar -->
+        <div class="flex-1 max-w-md mx-4 hidden md:block">
+          <div class="relative">
+            <input type="text" id="search-input" onkeyup="handleSearch()" placeholder="What do you want to learn today?" class="w-full pl-10 pr-4 py-2 rounded-full border border-slate-300 text-sm focus:outline-none focus:border-maple-600 focus:ring-1 focus:ring-maple-600 transition bg-slate-50 focus:bg-white">
+            <svg class="w-4 h-4 text-slate-400 absolute left-3.5 top-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+          </div>
+        </div>
+
+        <!-- Right Section: Cart & Profile Auth -->
+        <div class="flex items-center space-x-4">
+          <!-- Cart Icon Button -->
+          <button onclick="toggleCartDrawer()" class="relative p-2 text-slate-600 hover:text-maple-600 transition" title="View Cart">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z"></path></svg>
+            <span id="cart-count-badge" class="absolute top-0 right-0 inline-flex items-center justify-center px-1.5 py-0.5 text-xs font-bold leading-none text-white transform translate-x-1/4 -translate-y-1/4 bg-maple-600 rounded-full">0</span>
+          </button>
+
+          <!-- Auth Button -->
+          <button onclick="openAuthModal()" class="px-4 py-2 text-sm font-semibold text-slate-700 hover:text-maple-600 transition">Log In</button>
+          <button onclick="openAuthModal()" class="hidden sm:inline-flex px-4 py-2 text-sm font-semibold text-white bg-navy-900 hover:bg-navy-800 rounded-md shadow-xs transition">Join for Free</button>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= HERO SECTION & DUAL TRACK SWITCHER ================= -->
+  <section class="bg-white border-b border-slate-200 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        
+        <div class="lg:col-span-8 space-y-6">
+          <!-- Official Tagline Badge -->
+          <div class="inline-flex items-center gap-2 px-3 py-1 bg-rose-50 border border-rose-200 rounded-full text-xs font-bold text-maple-600">
+            <span>People</span> • <span>Skills</span> • <span>Stronger Communities</span>
+          </div>
+
+          <h1 class="text-3xl md:text-5xl font-extrabold text-navy-900 tracking-tight leading-tight">
+            Learn Without Limits with <br><span class="text-maple-600">Maple Future Institution</span>
+          </h1>
+
+          <p class="text-base md:text-lg text-slate-600 max-w-2xl">
+            Empowering Canadian learners through world-class interactive education, industry capstone projects, and top academic mentors.
+          </p>
+
+          <!-- Script Tagline -->
+          <div class="font-script text-2xl text-maple-600 font-bold tracking-wide">
+            A Brighter Tomorrow, Together
+          </div>
+
+          <!-- DUAL TRACK SELECTOR PILLS -->
+          <div class="pt-2">
+            <div class="inline-flex p-1 bg-slate-100 rounded-xl border border-slate-200">
+              <button id="track-btn-k12" onclick="switchTrack('k12')" class="px-5 py-2.5 rounded-lg text-xs md:text-sm font-bold transition flex items-center gap-2 bg-white text-navy-900 shadow-xs">
+                <span>🎒</span> Elementary & High School (K-12)
+              </button>
+              <button id="track-btn-pro" onclick="switchTrack('pro')" class="px-5 py-2.5 rounded-lg text-xs md:text-sm font-bold transition flex items-center gap-2 text-slate-600 hover:text-slate-900">
+                <span>🎓</span> Higher Ed, Graduates & Professionals
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Banner Graphic / Quick Stats -->
+        <div class="lg:col-span-4 hidden lg:block">
+          <div class="bg-gradient-to-br from-slate-900 to-navy-900 p-6 rounded-2xl text-white shadow-xl space-y-5 border border-slate-800">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+              <div>
+                <div class="text-2xl font-black text-maple-500">12,500+</div>
+                <div class="text-xs text-slate-400">Active Canadian Learners</div>
+              </div>
+              <div class="text-right">
+                <div class="text-2xl font-black text-white">4.9 ★</div>
+                <div class="text-xs text-slate-400">Average Student Rating</div>
+              </div>
+            </div>
+            <div class="space-y-3">
+              <div class="text-xs font-semibold uppercase tracking-wider text-slate-400">Featured Institution Perks</div>
+              <div class="flex items-center gap-2 text-xs text-slate-200">
+                <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                <span>Live Mentored Capstone Projects</span>
+              </div>
+              <div class="flex items-center gap-2 text-xs text-slate-200">
+                <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                <span>Verified Certificate of Completion</span>
+              </div>
+              <div class="flex items-center gap-2 text-xs text-slate-200">
+                <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                <span>Small Group Interactive Seminars</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= MAIN CONTENT AREA ================= -->
+  <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full space-y-12">
+
+    <!-- CATEGORY TAXONOMY FILTER BAR -->
+    <section class="space-y-3">
+      <div class="flex items-center justify-between">
+        <h2 class="text-xs font-bold text-slate-500 uppercase tracking-wider">Explore Course Topics</h2>
+        <span id="active-track-indicator" class="text-xs font-semibold text-maple-600 bg-rose-50 px-2 py-0.5 rounded">Showing K-12 Catalog</span>
+      </div>
+      <div id="category-pills" class="flex items-center space-x-2 overflow-x-auto pb-2 scrollbar-none">
+        <!-- JS Dynamic Pill Injection -->
+      </div>
+    </section>
+
+    <!-- SECTION 1: TRENDING COURSES -->
+    <section class="space-y-5">
+      <div class="flex items-center justify-between">
+        <div>
+          <h2 class="text-2xl font-bold text-navy-900">Trending Courses</h2>
+          <p class="text-xs text-slate-500">Most enrolled programs this month across Canada</p>
+        </div>
+      </div>
+      <div id="trending-courses-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- JS Course Card Injection -->
+      </div>
+    </section>
+
+    <!-- SECTION 2: RECOMMENDED COURSES -->
+    <section class="space-y-5">
+      <div class="flex items-center justify-between">
+        <div>
+          <h2 class="text-2xl font-bold text-navy-900">Recommended For You</h2>
+          <p class="text-xs text-slate-500">Curated based on trending industry skills & high student satisfaction</p>
+        </div>
+      </div>
+      <div id="recommended-courses-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- JS Course Card Injection -->
+      </div>
+    </section>
+
+    <!-- SECTION 3: TOP INSTRUCTORS & LIVE PROJECTS -->
+    <section class="bg-white rounded-2xl p-6 md:p-8 border border-slate-200 shadow-xs space-y-8">
+      <div class="border-b border-slate-100 pb-6">
+        <div class="inline-flex items-center gap-2 text-xs font-bold text-maple-600 uppercase tracking-wider mb-1">
+          <span>Mentors & Experiential Learning</span>
+        </div>
+        <h2 class="text-2xl font-bold text-navy-900">Top Faculty & Live Industry Projects</h2>
+        <p class="text-sm text-slate-600 max-w-3xl mt-1">
+          Learn directly from certified educators and corporate leads. Apply to host or join live capstone projects to gain real-world portfolio experience.
+        </p>
+      </div>
+
+      <!-- Top Instructors Grid -->
+      <div id="instructors-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- JS Instructor Injection -->
+      </div>
+
+      <!-- Live Projects Open Board -->
+      <div class="bg-slate-50 rounded-xl p-6 border border-slate-200 space-y-4">
+        <div class="flex items-center justify-between flex-wrap gap-3">
+          <div>
+            <h3 class="text-lg font-bold text-navy-900">Active Mentored Projects Open for Application</h3>
+            <p class="text-xs text-slate-500">Apply to work on real-world briefs guided by Maple Future instructors</p>
+          </div>
+          <span class="px-3 py-1 bg-emerald-100 text-emerald-800 font-semibold text-xs rounded-full">● 3 Projects Accepting Applications</span>
+        </div>
+        
+        <div id="projects-list" class="space-y-3">
+          <!-- JS Projects Injection -->
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="bg-navy-900 text-white mt-16 border-t border-navy-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div class="space-y-4">
+          <div class="flex items-center space-x-3">
+            <svg class="w-8 h-8 text-maple-600" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M100 15 L118 55 L135 48 L130 75 L158 68 L148 95 L175 108 L145 125 L152 145 L120 135 L100 178 L80 135 L48 145 L55 125 L25 108 L52 95 L42 68 L70 75 L65 48 L82 55 Z" fill="#C41E3A" />
+            </svg>
+            <span class="text-lg font-bold">Maple Future</span>
+          </div>
+          <p class="text-xs text-slate-400">
+            Maple Future Institution is dedicated to building skills, fostering innovation, and strengthening communities across Canada.
+          </p>
+          <div class="font-script text-lg text-maple-500">
+            A Brighter Tomorrow, Together
+          </div>
+        </div>
+
+        <div>
+          <h3 class="text-xs font-bold text-slate-300 uppercase tracking-wider mb-4">K-12 Programs</h3>
+          <ul class="space-y-2 text-xs text-slate-400">
+            <li><a href="#" onclick="switchTrack('k12')" class="hover:text-white transition">Python Arcade Lab</a></li>
+            <li><a href="#" onclick="switchTrack('k12')" class="hover:text-white transition">Waterloo Math Prep</a></li>
+            <li><a href="#" onclick="switchTrack('k12')" class="hover:text-white transition">Youth AI Explorers</a></li>
+            <li><a href="#" onclick="switchTrack('k12')" class="hover:text-white transition">Parliamentary Debate</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-xs font-bold text-slate-300 uppercase tracking-wider mb-4">Professional Hub</h3>
+          <ul class="space-y-2 text-xs text-slate-400">
+            <li><a href="#" onclick="switchTrack('pro')" class="hover:text-white transition">Generative AI Engineering</a></li>
+            <li><a href="#" onclick="switchTrack('pro')" class="hover:text-white transition">Corporate Financial Modeling</a></li>
+            <li><a href="#" onclick="switchTrack('pro')" class="hover:text-white transition">Full-Stack Web Development</a></li>
+            <li><a href="#" onclick="switchTrack('pro')" class="hover:text-white transition">Agile Project Management</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-xs font-bold text-slate-300 uppercase tracking-wider mb-4">Institution</h3>
+          <ul class="space-y-2 text-xs text-slate-400">
+            <li><a href="#" class="hover:text-white transition">About Maple Future</a></li>
+            <li><a href="#" class="hover:text-white transition">Host a Live Project</a></li>
+            <li><a href="#" class="hover:text-white transition">Careers & Mentors</a></li>
+            <li><a href="#" class="hover:text-white transition">Contact Us</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="border-t border-navy-800 mt-10 pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500">
+        <div>© 2026 Maple Future Institution. All rights reserved.</div>
+        <div class="flex space-x-4 mt-2 sm:mt-0">
+          <a href="#" class="hover:text-slate-400">Privacy Policy</a>
+          <a href="#" class="hover:text-slate-400">Terms of Service</a>
+          <a href="#" class="hover:text-slate-400">Accessibility</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= MODALS & SLIDE-OVER DRAWER ================= -->
+
+  <!-- COURSE DETAIL MODAL -->
+  <div id="course-modal" class="hidden fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-3xl w-full overflow-hidden shadow-2xl border border-slate-200 transform transition-all my-8">
+      <div id="course-modal-content">
+        <!-- JS Dynamic Modal Injection -->
+      </div>
+    </div>
+  </div>
+
+  <!-- PROJECT APPLICATION MODAL -->
+  <div id="project-modal" class="hidden fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-200">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+        <h3 class="text-lg font-bold text-navy-900">Apply for Live Mentored Project</h3>
+        <button onclick="closeProjectModal()" class="text-slate-400 hover:text-slate-600 text-xl font-bold">&times;</button>
+      </div>
+      <form id="project-app-form" onsubmit="submitProjectApp(event)" class="space-y-4 mt-4">
+        <div>
+          <label class="block text-xs font-semibold text-slate-600 mb-1">Project Name</label>
+          <input type="text" id="proj-title-field" readonly class="w-full px-3 py-2 bg-slate-100 border border-slate-300 rounded-md text-sm font-semibold text-slate-700">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-600 mb-1">Full Name</label>
+          <input type="text" required placeholder="e.g. Alex Tremblay" class="w-full px-3 py-2 border border-slate-300 rounded-md text-sm focus:outline-none focus:border-maple-600">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-600 mb-1">Email Address</label>
+          <input type="email" required placeholder="alex@example.ca" class="w-full px-3 py-2 border border-slate-300 rounded-md text-sm focus:outline-none focus:border-maple-600">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-600 mb-1">Statement of Interest & Relevant Experience</label>
+          <textarea rows="3" required placeholder="Briefly describe why you want to work on this brief..." class="w-full px-3 py-2 border border-slate-300 rounded-md text-sm focus:outline-none focus:border-maple-600"></textarea>
+        </div>
+        <div class="flex items-center justify-end gap-3 pt-2">
+          <button type="button" onclick="closeProjectModal()" class="px-4 py-2 text-xs font-semibold text-slate-600 hover:text-slate-800">Cancel</button>
+          <button type="submit" class="px-4 py-2 bg-maple-600 text-white rounded-md text-xs font-semibold hover:bg-maple-700 transition">Submit Application</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- AUTHENTICATION MODAL -->
+  <div id="auth-modal" class="hidden fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-200">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+        <div class="flex items-center space-x-2">
+          <span class="text-lg font-bold text-navy-900">Welcome to Maple Future</span>
+        </div>
+        <button onclick="closeAuthModal()" class="text-slate-400 hover:text-slate-600 text-xl font-bold">&times;</button>
+      </div>
+      <div class="space-y-4 mt-4">
+        <div class="flex border-b border-slate-200 text-sm font-semibold">
+          <button class="pb-2 border-b-2 border-maple-600 text-maple-600 flex-1 text-center">Log In</button>
+          <button class="pb-2 text-slate-400 hover:text-slate-600 flex-1 text-center">Create Account</button>
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-600 mb-1">Email</label>
+          <input type="email" placeholder="student@maplefuture.ca" class="w-full px-3 py-2 border border-slate-300 rounded-md text-sm focus:outline-none focus:border-maple-600">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-600 mb-1">Password</label>
+          <input type="password" placeholder="••••••••" class="w-full px-3 py-2 border border-slate-300 rounded-md text-sm focus:outline-none focus:border-maple-600">
+        </div>
+        <button onclick="simulateAuth()" class="w-full py-2.5 bg-navy-900 hover:bg-navy-800 text-white rounded-md text-sm font-semibold transition">Log In to Portal</button>
+        <div class="text-center text-xs text-slate-400">Or sign in with Google / Institutional SSO</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE-OVER CART DRAWER -->
+  <div id="cart-drawer" class="hidden fixed inset-0 z-50 overflow-hidden">
+    <div class="absolute inset-0 bg-slate-900/50 backdrop-blur-xs" onclick="toggleCartDrawer()"></div>
+    <div class="fixed inset-y-0 right-0 max-w-full flex pl-10">
+      <div class="w-screen max-w-md bg-white shadow-2xl flex flex-col">
+        
+        <!-- Cart Header -->
+        <div class="px-6 py-4 bg-navy-900 text-white flex items-center justify-between">
+          <div class="flex items-center space-x-2">
+            <svg class="w-5 h-5 text-maple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+            <h2 class="text-base font-bold">Your Learning Cart</h2>
+          </div>
+          <button onclick="toggleCartDrawer()" class="text-slate-300 hover:text-white text-xl font-bold">&times;</button>
+        </div>
+
+        <!-- Cart Items List -->
+        <div id="cart-items-container" class="flex-1 overflow-y-auto p-6 space-y-4">
+          <!-- JS Cart Dynamic Injection -->
+        </div>
+
+        <!-- Cart Summary & Checkout -->
+        <div class="p-6 bg-slate-50 border-t border-slate-200 space-y-4">
+          <div class="space-y-2 text-xs text-slate-600">
+            <div class="flex justify-between">
+              <span>Subtotal</span>
+              <span id="cart-subtotal" class="font-bold text-slate-800">$0.00 CAD</span>
+            </div>
+            <div class="flex justify-between">
+              <span>Estimated HST (13%)</span>
+              <span id="cart-tax" class="font-bold text-slate-800">$0.00 CAD</span>
+            </div>
+            <div class="flex justify-between text-emerald-600 font-semibold">
+              <span>Promo Discount (MAPLE10)</span>
+              <span id="cart-discount">-$0.00 CAD</span>
+            </div>
+            <div class="flex justify-between text-base font-extrabold text-navy-900 pt-2 border-t border-slate-200">
+              <span>Total CAD</span>
+              <span id="cart-total">$0.00 CAD</span>
+            </div>
+          </div>
+
+          <div class="flex gap-2">
+            <input type="text" id="promo-input" placeholder="Promo code (e.g. MAPLE10)" class="flex-1 px-3 py-1.5 border border-slate-300 rounded text-xs uppercase focus:outline-none focus:border-maple-600">
+            <button onclick="applyPromo()" class="px-3 py-1.5 bg-slate-200 text-slate-700 hover:bg-slate-300 rounded text-xs font-semibold">Apply</button>
+          </div>
+
+          <button onclick="triggerCheckout()" class="w-full py-3 bg-maple-600 hover:bg-maple-700 text-white font-bold rounded-lg shadow-md transition text-sm flex items-center justify-center gap-2">
+            <span>Complete Order</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ================= JAVASCRIPT APPLICATION LOGIC ================= -->
+  <script>
+    /* State Management */
+    let currentSection = 'k12'; // 'k12' or 'pro'
+    let selectedTag = 'All';
+    let searchQuery = '';
+    let cart = [];
+    let appliedPromo = false;
+
+    /* Master Course Data Catalog */
+    const COURSES = [
+      // K-12 SECTION
+      {
+        id: "k1",
+        section: "k12",
+        title: "Python for Youth: Build Arcade Games",
+        category: "Python",
+        level: "Beginner",
+        instructor: "Emily Carter, B.Ed",
+        institution: "Maple Youth STEM Lab",
+        rating: 4.9,
+        reviewsCount: 142,
+        price: 99,
+        trending: true,
+        summary: "An interactive, visual introduction to Python logic, loops, and data structures tailored for elementary & high school students.",
+        syllabus: [
+          "Module 1: Variables, Inputs & Turtle Graphics",
+          "Module 2: Conditional Logic & Creating a Quiz Engine",
+          "Module 3: Functions, Loops & Making a Snake Game"
+        ],
+        reviews: [
+          { user: "Sarah M. (Parent)", rating: 5, comment: "My 12-year-old was able to build her first playable game in 3 weeks!" }
+        ]
+      },
+      {
+        id: "k2",
+        section: "k12",
+        title: "Canadian Math Olympiad (Gauss & Pascal)",
+        category: "Math",
+        level: "Intermediate",
+        instructor: "Dr. Raymond Vance",
+        institution: "Waterloo Contest Coaching",
+        rating: 4.8,
+        reviewsCount: 89,
+        price: 120,
+        trending: true,
+        summary: "Specialized contest preparation for the University of Waterloo Gauss, Pascal, and Fermat math competitions.",
+        syllabus: [
+          "Module 1: Number Theory & Clever Speed Math Shortcuts",
+          "Module 2: Combinatorics, Permutations & Logic Puzzles",
+          "Module 3: Mock Contest Strategy & Past Paper Breakdown"
+        ],
+        reviews: [
+          { user: "Kevin T. (Grade 9)", rating: 5, comment: "Gave me the exact logic strategies needed for the Gauss paper." }
+        ]
+      },
+      {
+        id: "k3",
+        section: "k12",
+        title: "AI Essentials & Digital Ethics for Students",
+        category: "AI Essentials",
+        level: "Beginner",
+        instructor: "Emily Carter, B.Ed",
+        institution: "Maple Digital Safety",
+        rating: 4.7,
+        reviewsCount: 64,
+        price: 85,
+        trending: false,
+        summary: "Understanding artificial intelligence responsibly. Covers generative AI tools, prompt engineering, and digital footprint ethics.",
+        syllabus: [
+          "Module 1: How Computers Learn (Machine Learning 101)",
+          "Module 2: Creative AI Tools & Effective Prompting",
+          "Module 3: Ethics, Deepfakes & Academic Integrity"
+        ],
+        reviews: [
+          { user: "David L.", rating: 4, comment: "Great overview for middle schoolers." }
+        ]
+      },
+      {
+        id: "k4",
+        section: "k12",
+        title: "Youth Public Speaking & Parliamentary Debate",
+        category: "Communication",
+        level: "Beginner",
+        instructor: "Claire Fontaine, M.A.",
+        institution: "Maple Oratory Society",
+        rating: 4.9,
+        reviewsCount: 110,
+        price: 95,
+        trending: false,
+        summary: "Master speech preparation, stage presence, argument construction, and cross-examination debate techniques.",
+        syllabus: [
+          "Module 1: Voice Projection & Overcoming Stage Anxiety",
+          "Module 2: Structuring Persuasive Arguments (ARE Model)",
+          "Module 3: Live Parliamentary Debate Simulation"
+        ],
+        reviews: [
+          { user: "Priya K.", rating: 5, comment: "Boosted my confidence immensely for high school presentations." }
+        ]
+      },
+      {
+        id: "k5",
+        section: "k12",
+        title: "Creative Writing & Storytelling Masterclass",
+        category: "Communication",
+        level: "Beginner",
+        instructor: "Claire Fontaine, M.A.",
+        institution: "Maple Arts & Humanities",
+        rating: 4.8,
+        reviewsCount: 76,
+        price: 89,
+        trending: true,
+        summary: "Unlock imaginative world-building, character arcs, descriptive language, and narrative structure for young writers.",
+        syllabus: [
+          "Module 1: Character Creation & Emotional Hooks",
+          "Module 2: World-Building & Setting Mood",
+          "Module 3: Plot Structure, Dialogue & Editing"
+        ],
+        reviews: [
+          { user: "Hannah B. (Grade 8)", rating: 5, comment: "Loved writing my short story compilation!" }
+        ]
+      },
+      {
+        id: "k6",
+        section: "k12",
+        title: "Cybersecurity Fundamentals for Youth",
+        category: "Cyber Security",
+        level: "Intermediate",
+        instructor: "Julian Thorne, CISSP",
+        institution: "Maple Defense Lab",
+        rating: 4.9,
+        reviewsCount: 98,
+        price: 119,
+        trending: true,
+        summary: "Learn network safety, encryption basics, password defense, and ethical hacking concepts in a secure sandbox.",
+        syllabus: [
+          "Module 1: How the Internet Works & Packet Security",
+          "Module 2: Cryptography, Hashing & Digital Keys",
+          "Module 3: Phishing Prevention & Ethical Hacking Intro"
+        ],
+        reviews: [
+          { user: "Liam S.", rating: 5, comment: "Hands down the coolest computer science class I've taken." }
+        ]
+      },
+      {
+        id: "k7",
+        section: "k12",
+        title: "Robotics & Micro:bit Hardware Lab",
+        category: "Technicals",
+        level: "Beginner",
+        instructor: "Emily Carter, B.Ed",
+        institution: "Maple Youth STEM Lab",
+        rating: 4.7,
+        reviewsCount: 54,
+        price: 129,
+        trending: false,
+        summary: "Build physical computing projects using BBC Micro:bit controllers, LED arrays, motor drivers, and Block/Python code.",
+        syllabus: [
+          "Module 1: Sensors, Pins & Micro:bit Circuitry",
+          "Module 2: Programming Motors & Radio Communication",
+          "Module 3: Final Project: Automated Smart Plant Waterer"
+        ],
+        reviews: [
+          { user: "Parent of Noah", rating: 5, comment: "Engaging hardware kit integration!" }
+        ]
+      },
+
+      // HIGHER ED & PROFESSIONAL SECTION
+      {
+        id: "p1",
+        section: "pro",
+        title: "Generative AI & LLM Engineering Essentials",
+        category: "AI Essentials",
+        level: "Intermediate",
+        instructor: "Dr. Alexander Chen",
+        institution: "AI Research Institute",
+        rating: 4.9,
+        reviewsCount: 320,
+        price: 199,
+        trending: true,
+        summary: "Build enterprise Generative AI apps. Covers RAG (Retrieval-Augmented Generation), vector databases, and LangChain orchestration.",
+        syllabus: [
+          "Module 1: Embeddings & Vector Search Architecture",
+          "Module 2: Building RAG Pipelines with Python & Pinecone",
+          "Module 3: Fine-tuning Open-Source LLMs for Industry"
+        ],
+        reviews: [
+          { user: "Marcus V. (Software Dev)", rating: 5, comment: "Directly applicable to our company's new AI features." }
+        ]
+      },
+      {
+        id: "p2",
+        section: "pro",
+        title: "Python Data Science & Pandas Operations",
+        category: "Data Science",
+        level: "Beginner",
+        instructor: "Sarah Al-Mansoor",
+        institution: "Maple Data Lab",
+        rating: 4.8,
+        reviewsCount: 215,
+        price: 160,
+        trending: true,
+        summary: "Master data cleaning, exploratory data analysis, and automated Excel reporting using Python, Pandas, and Matplotlib.",
+        syllabus: [
+          "Module 1: Pandas DataFrames & Wrangling Raw Files",
+          "Module 2: Data Visualization & Executive Dashboards",
+          "Module 3: Automated Scripting for Corporate Analytics"
+        ],
+        reviews: [
+          { user: "Jessica W.", rating: 5, comment: "Transformed my daily workflow in corporate finance." }
+        ]
+      },
+      {
+        id: "p3",
+        section: "pro",
+        title: "Corporate Finance & M&A Valuation Modeling",
+        category: "Finance",
+        level: "Intermediate",
+        instructor: "Michael Chang, CFA",
+        institution: "Bay Street Finance Academy",
+        rating: 4.7,
+        reviewsCount: 178,
+        price: 210,
+        trending: false,
+        summary: "Build professional 3-statement financial models, Discounted Cash Flow (DCF) valuations, and LBO scenarios.",
+        syllabus: [
+          "Module 1: 3-Statement Financial Model Linking",
+          "Module 2: Discounted Cash Flow (DCF) & WACC Calculation",
+          "Module 3: Mergers & Acquisitions Accretion/Dilution Analysis"
+        ],
+        reviews: [
+          { user: "Daniel B.", rating: 4, comment: "Extremely thorough Excel templates provided." }
+        ]
+      },
+      {
+        id: "p4",
+        section: "pro",
+        title: "Enterprise B2B Sales Strategy & Account Execution",
+        category: "Sales & Marketing",
+        level: "Beginner",
+        instructor: "Michael Chang, CFA",
+        institution: "Commercial Leadership Hub",
+        rating: 4.8,
+        reviewsCount: 94,
+        price: 150,
+        trending: false,
+        summary: "Master outbound sales cadences, discovery framework calls, handling enterprise objections, and closing multi-stakeholder deals.",
+        syllabus: [
+          "Module 1: Identifying Ideal Customer Profiles (ICP)",
+          "Module 2: The Command of the Sale Discovery Framework",
+          "Module 3: Negotiating Contract Terms & Executive Sign-off"
+        ],
+        reviews: [
+          { user: "Samantha K.", rating: 5, comment: "Helped me land my first 6-figure enterprise client." }
+        ]
+      },
+      {
+        id: "p5",
+        section: "pro",
+        title: "Digital Marketing & Brand Strategy with AI",
+        category: "Sales & Marketing",
+        level: "Intermediate",
+        instructor: "Nadia Rossi, MBA",
+        institution: "Maple Growth Academy",
+        rating: 4.9,
+        reviewsCount: 204,
+        price: 249,
+        trending: true,
+        summary: "Leverage generative AI for multi-channel performance marketing, SEO automation, paid ad optimization, and brand positioning.",
+        syllabus: [
+          "Module 1: AI-Powered Customer Segmentation & Copywriting",
+          "Module 2: Programmatic Ad Campaign Structure & Conversion Rate Optimization",
+          "Module 3: Attribution Modeling & Executive Marketing Dashboards"
+        ],
+        reviews: [
+          { user: "Oliver P.", rating: 5, comment: "We doubled our inbound lead ROI using these workflows." }
+        ]
+      },
+      {
+        id: "p6",
+        section: "pro",
+        title: "Agile Project Management & Operations",
+        category: "Operations",
+        level: "Intermediate",
+        instructor: "Victor Hugo, PMP",
+        institution: "Institute of Operations",
+        rating: 4.8,
+        reviewsCount: 162,
+        price: 199,
+        trending: true,
+        summary: "Master Scrum sprints, Kanban bottleneck elimination, lean process engineering, and Jira/Asana workflow automation.",
+        syllabus: [
+          "Module 1: Scrum Ceremonies, Backlog Refinement & Sprint Planning",
+          "Module 2: Lean Six Sigma Bottleneck & Cycle-Time Reduction",
+          "Module 3: Cross-functional Team Leadership & Operational Risk"
+        ],
+        reviews: [
+          { user: "Elena R. (Operations Lead)", rating: 5, comment: "Essential framework for scaled engineering teams." }
+        ]
+      },
+      {
+        id: "p7",
+        section: "pro",
+        title: "Full-Stack Web Development Bootcamp",
+        category: "Web Dev",
+        level: "Beginner",
+        instructor: "Sarah Al-Mansoor",
+        institution: "Maple Tech Institute",
+        rating: 4.9,
+        reviewsCount: 410,
+        price: 299,
+        trending: true,
+        summary: "Build modern web applications from scratch using React, Node.js, Express, Tailwind CSS, and REST API database connections.",
+        syllabus: [
+          "Module 1: Modern JavaScript (ES6+), React State & Hooks",
+          "Module 2: Node.js, Express APIs & PostgreSQL Relational Databases",
+          "Module 3: Authentication, Cloud Deployment & CI/CD Pipelines"
+        ],
+        reviews: [
+          { user: "Tariq K.", rating: 5, comment: "Clear, practical, and helped me build a portfolio that landed interviews!" }
+        ]
+      }
+    ];
+
+    /* Instructor Profiles */
+    const INSTRUCTORS = [
+      {
+        name: "Emily Carter, B.Ed",
+        role: "K-12 STEM Director",
+        rating: 4.9,
+        students: "4,200+",
+        openForProjects: true,
+        projectTitle: "Youth Eco-Tech Mobile App Design",
+        avatar: "EC"
+      },
+      {
+        name: "Dr. Alexander Chen",
+        role: "Senior AI Researcher",
+        rating: 4.9,
+        students: "8,900+",
+        openForProjects: true,
+        projectTitle: "Local Business LLM Chatbot Integration",
+        avatar: "AC"
+      },
+      {
+        name: "Michael Chang, CFA",
+        role: "Corporate Finance Lead",
+        rating: 4.8,
+        students: "3,100+",
+        openForProjects: true,
+        projectTitle: "Fintech Startup Valuation Model",
+        avatar: "MC"
+      }
+    ];
+
+    /* Live Industry Projects */
+    const LIVE_PROJECTS = [
+      {
+        id: "proj1",
+        title: "Local Business LLM Chatbot Integration",
+        host: "Dr. Alexander Chen (AI Research Lab)",
+        duration: "4 Weeks",
+        spots: "2 Openings",
+        description: "Collaborate with a team of students to build a custom RAG customer support chatbot for a Toronto-based retailer."
+      },
+      {
+        id: "proj2",
+        title: "Fintech Startup Valuation & M&A Pitch Deck",
+        host: "Michael Chang, CFA (Bay Street Finance)",
+        duration: "3 Weeks",
+        spots: "3 Openings",
+        description: "Perform real-world discounted cash flow analysis and construct an M&A deck for an emerging Canadian tech venture."
+      },
+      {
+        id: "proj3",
+        title: "Youth Eco-Tech Mobile App Wireframe",
+        host: "Emily Carter, B.Ed (Maple Youth STEM Lab)",
+        duration: "2 Weeks",
+        spots: "5 Openings",
+        description: "High school capstone project: Design and prototype an interactive mobile app tracking local carbon reduction."
+      }
+    ];
+
+    /* Initialize App */
+    window.onload = function() {
+      renderCategoryTags();
+      renderCourses();
+      renderInstructors();
+      renderProjects();
+      updateCartUI();
+    };
+
+    /* Switch Dual Track (K-12 vs Professional) */
+    function switchTrack(track) {
+      currentSection = track;
+      selectedTag = 'All';
+
+      const btnK12 = document.getElementById("track-btn-k12");
+      const btnPro = document.getElementById("track-btn-pro");
+      const indicator = document.getElementById("active-track-indicator");
+
+      if(track === 'k12') {
+        btnK12.className = "px-5 py-2.5 rounded-lg text-xs md:text-sm font-bold transition flex items-center gap-2 bg-white text-navy-900 shadow-xs";
+        btnPro.className = "px-5 py-2.5 rounded-lg text-xs md:text-sm font-bold transition flex items-center gap-2 text-slate-600 hover:text-slate-900";
+        indicator.innerText = "Showing K-12 Catalog";
+        indicator.className = "text-xs font-semibold text-maple-600 bg-rose-50 px-2 py-0.5 rounded";
+      } else {
+        btnPro.className = "px-5 py-2.5 rounded-lg text-xs md:text-sm font-bold transition flex items-center gap-2 bg-white text-navy-900 shadow-xs";
+        btnK12.className = "px-5 py-2.5 rounded-lg text-xs md:text-sm font-bold transition flex items-center gap-2 text-slate-600 hover:text-slate-900";
+        indicator.innerText = "Showing Professional Catalog";
+        indicator.className = "text-xs font-semibold text-navy-900 bg-slate-100 px-2 py-0.5 rounded";
+      }
+
+      renderCategoryTags();
+      renderCourses();
+    }
+
+    /* Category Taxonomy Pills */
+    function renderCategoryTags() {
+      const container = document.getElementById("category-pills");
+      const tags = currentSection === 'k12' 
+        ? ["All", "Python", "Math", "AI Essentials", "Communication", "Cyber Security", "Technicals"]
+        : ["All", "AI Essentials", "Data Science", "Finance", "Sales & Marketing", "Operations", "Web Dev"];
+
+      container.innerHTML = tags.map(tag => `
+        <button onclick="filterByTag('${tag}')" class="px-4 py-1.5 rounded-full text-xs font-semibold transition whitespace-nowrap ${
+          selectedTag === tag 
+            ? 'bg-navy-900 text-white shadow-xs' 
+            : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+        }">
+          ${tag}
+        </button>
+      `).join('');
+    }
+
+    function filterByTag(tag) {
+      selectedTag = tag;
+      renderCategoryTags();
+      renderCourses();
+    }
+
+    function handleSearch() {
+      searchQuery = document.getElementById("search-input").value.toLowerCase();
+      renderCourses();
+    }
+
+    /* Render Course Cards */
+    function renderCourses() {
+      const trendingContainer = document.getElementById("trending-courses-grid");
+      const recommendedContainer = document.getElementById("recommended-courses-grid");
+
+      // Filter catalog
+      let filtered = COURSES.filter(c => c.section === currentSection);
+
+      if(selectedTag !== 'All') {
+        filtered = filtered.filter(c => c.category === selectedTag);
+      }
+
+      if(searchQuery.trim() !== '') {
+        filtered = filtered.filter(c => 
+          c.title.toLowerCase().includes(searchQuery) || 
+          c.summary.toLowerCase().includes(searchQuery) ||
+          c.category.toLowerCase().includes(searchQuery)
+        );
+      }
+
+      const trendingList = filtered.filter(c => c.trending);
+      const recommendedList = filtered.filter(c => !c.trending || filtered.length <= 2);
+
+      trendingContainer.innerHTML = trendingList.length > 0 
+        ? trendingList.map(createCourseCardHTML).join('') 
+        : `<div class="col-span-4 text-center py-8 text-slate-400 text-sm">No trending courses matched your filters.</div>`;
+
+      recommendedContainer.innerHTML = recommendedList.length > 0 
+        ? recommendedList.map(createCourseCardHTML).join('') 
+        : `<div class="col-span-4 text-center py-8 text-slate-400 text-sm">No recommended courses found.</div>`;
+    }
+
+    /* Coursera-style Card Markup */
+    function createCourseCardHTML(course) {
+      const inCart = cart.some(item => item.id === course.id);
+      return `
+        <div class="bg-white border border-slate-200 rounded-xl overflow-hidden hover:shadow-lg transition-all flex flex-col justify-between group">
+          <div class="p-5 space-y-3">
+            <div class="flex items-center justify-between text-xs text-slate-400">
+              <span class="font-semibold text-slate-600">${course.institution}</span>
+              <span class="bg-slate-100 px-2 py-0.5 rounded text-slate-600 font-medium">${course.level}</span>
+            </div>
+
+            <h3 onclick="openCourseModal('${course.id}')" class="text-base font-bold text-navy-900 group-hover:text-maple-600 transition cursor-pointer line-clamp-2">
+              ${course.title}
+            </h3>
+
+            <p class="text-xs text-slate-500 line-clamp-2 leading-relaxed">
+              ${course.summary}
+            </p>
+
+            <div class="flex items-center space-x-1 text-xs">
+              <span class="font-bold text-amber-500">${course.rating}</span>
+              <span class="text-amber-400">★★★★★</span>
+              <span class="text-slate-400">(${course.reviewsCount})</span>
+            </div>
+          </div>
+
+          <div class="px-5 py-3 bg-slate-50 border-t border-slate-100 flex items-center justify-between">
+            <div>
+              <span class="text-xs text-slate-400 block">Tuition</span>
+              <span class="text-sm font-extrabold text-navy-900">$${course.price} CAD</span>
+            </div>
+            
+            <div class="flex items-center gap-2">
+              <button onclick="openCourseModal('${course.id}')" class="text-xs font-semibold text-slate-600 hover:text-navy-900 px-2 py-1">
+                Details
+              </button>
+              <button onclick="addToCart('${course.id}')" ${inCart ? 'disabled' : ''} class="px-3 py-1.5 text-xs font-bold rounded transition ${
+                inCart 
+                  ? 'bg-slate-200 text-slate-500 cursor-not-allowed' 
+                  : 'bg-maple-600 hover:bg-maple-700 text-white shadow-xs'
+              }">
+                ${inCart ? 'In Cart' : 'Enroll'}
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    /* Instructor Section */
+    function renderInstructors() {
+      const container = document.getElementById("instructors-grid");
+      container.innerHTML = INSTRUCTORS.map(inst => `
+        <div class="p-5 border border-slate-200 rounded-xl bg-white flex flex-col justify-between space-y-4">
+          <div class="flex items-center space-x-3">
+            <div class="w-12 h-12 rounded-full bg-navy-900 text-white font-bold flex items-center justify-center text-sm shadow-sm">
+              ${inst.avatar}
+            </div>
+            <div>
+              <h4 class="text-sm font-bold text-navy-900">${inst.name}</h4>
+              <div class="text-xs text-slate-500">${inst.role}</div>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between text-xs border-t border-b border-slate-100 py-2 text-slate-600">
+            <span>Rating: <strong class="text-slate-800">${inst.rating} ★</strong></span>
+            <span>Students: <strong class="text-slate-800">${inst.students}</strong></span>
+          </div>
+
+          <div>
+            <span class="inline-flex items-center gap-1.5 text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
+              <span>●</span> Open to Host Live Projects
+            </span>
+            <div class="text-xs text-slate-500 mt-1 truncate">Current Project: "${inst.projectTitle}"</div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    /* Live Projects Board */
+    function renderProjects() {
+      const container = document.getElementById("projects-list");
+      container.innerHTML = LIVE_PROJECTS.map(proj => `
+        <div class="bg-white p-4 rounded-lg border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div class="space-y-1">
+            <div class="flex items-center gap-2">
+              <h4 class="text-sm font-bold text-navy-900">${proj.title}</h4>
+              <span class="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-semibold">${proj.duration}</span>
+            </div>
+            <p class="text-xs text-slate-600">${proj.description}</p>
+            <div class="text-[11px] text-slate-400">Host: <span class="font-medium text-slate-700">${proj.host}</span></div>
+          </div>
+          <div class="flex items-center gap-3 shrink-0">
+            <span class="text-xs font-semibold text-emerald-600">${proj.spots}</span>
+            <button onclick="openProjectModal('${proj.title}')" class="px-3 py-1.5 bg-navy-900 hover:bg-navy-800 text-white rounded text-xs font-semibold transition">
+              Apply Brief
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    /* Modals & Interactions */
+    function openCourseModal(courseId) {
+      const course = COURSES.find(c => c.id === courseId);
+      if(!course) return;
+
+      const modalContent = document.getElementById("course-modal-content");
+      const inCart = cart.some(item => item.id === course.id);
+
+      modalContent.innerHTML = `
+        <div class="bg-navy-900 text-white p-6 relative">
+          <button onclick="closeCourseModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-2xl font-bold">&times;</button>
+          <div class="text-xs font-semibold text-maple-500 uppercase tracking-wider">${course.institution} • ${course.category}</div>
+          <h2 class="text-xl md:text-2xl font-extrabold mt-1">${course.title}</h2>
+          <div class="flex items-center space-x-4 mt-3 text-xs text-slate-300">
+            <span>Level: ${course.level}</span>
+            <span>•</span>
+            <span>Rating: ${course.rating} ★ (${course.reviewsCount} reviews)</span>
+            <span>•</span>
+            <span>Instructor: ${course.instructor}</span>
+          </div>
+        </div>
+
+        <div class="p-6 space-y-6 max-h-[70vh] overflow-y-auto">
+          <div>
+            <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Course Overview</h4>
+            <p class="text-sm text-slate-700 leading-relaxed">${course.summary}</p>
+          </div>
+
+          <div>
+            <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Syllabus & Modules</h4>
+            <div class="space-y-2">
+              ${course.syllabus.map((mod, idx) => `
+                <div class="p-3 bg-slate-50 border border-slate-200 rounded-lg text-xs font-semibold text-slate-800 flex items-center justify-between">
+                  <span>${mod}</span>
+                  <span class="text-slate-400 font-normal">Module ${idx + 1}</span>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+
+          <!-- Verified Student Reviews -->
+          <div>
+            <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Verified Student Reviews</h4>
+            <div class="space-y-3">
+              ${course.reviews.map(rev => `
+                <div class="p-3 bg-slate-50 rounded-lg text-xs space-y-1">
+                  <div class="flex justify-between font-bold text-slate-700">
+                    <span>${rev.user}</span>
+                    <span class="text-amber-500">${'★'.repeat(rev.rating)}</span>
+                  </div>
+                  <p class="text-slate-600 italic">"${rev.comment}"</p>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+
+          <!-- Add Review Form -->
+          <div class="border-t border-slate-200 pt-4">
+            <h4 class="text-xs font-bold text-slate-700 mb-2">Submit Your Review</h4>
+            <div class="flex gap-2">
+              <input type="text" id="review-comment" placeholder="Write a brief review of this course..." class="flex-1 text-xs border border-slate-300 rounded px-3 py-1.5 focus:outline-none focus:border-maple-600">
+              <button onclick="submitReview('${course.id}')" class="px-3 py-1.5 bg-slate-800 text-white rounded text-xs font-semibold hover:bg-slate-900">Submit</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-4 bg-slate-50 border-t border-slate-200 flex items-center justify-between">
+          <div>
+            <span class="text-xs text-slate-400 block">Total Tuition</span>
+            <span class="text-xl font-extrabold text-navy-900">$${course.price} CAD</span>
+          </div>
+          <div class="flex gap-2">
+            <button onclick="closeCourseModal()" class="px-4 py-2 border border-slate-300 rounded text-xs font-semibold text-slate-600">Close</button>
+            <button onclick="addToCart('${course.id}'); closeCourseModal();" ${inCart ? 'disabled' : ''} class="px-5 py-2 bg-maple-600 hover:bg-maple-700 text-white font-bold rounded text-xs shadow-md transition">
+              ${inCart ? 'Already in Cart' : 'Enroll Now'}
+            </button>
+          </div>
+        </div>
+      `;
+
+      document.getElementById("course-modal").classList.remove("hidden");
+    }
+
+    function closeCourseModal() {
+      document.getElementById("course-modal").classList.add("hidden");
+    }
+
+    function submitReview(courseId) {
+      const input = document.getElementById("review-comment");
+      if(!input.value.trim()) return;
+
+      const course = COURSES.find(c => c.id === courseId);
+      if(course) {
+        course.reviews.unshift({
+          user: "You (Verified Student)",
+          rating: 5,
+          comment: input.value.trim()
+        });
+        course.reviewsCount++;
+        openCourseModal(courseId); // Refresh modal view
+        renderCourses();
+      }
+    }
+
+    /* Live Project Modal */
+    function openProjectModal(projectTitle) {
+      document.getElementById("proj-title-field").value = projectTitle;
+      document.getElementById("project-modal").classList.remove("hidden");
+    }
+    function closeProjectModal() {
+      document.getElementById("project-modal").classList.add("hidden");
+    }
+    function submitProjectApp(e) {
+      e.preventDefault();
+      alert("Application submitted successfully! Our faculty team will review your statement.");
+      closeProjectModal();
+    }
+
+    /* Auth & Explore Dropdowns */
+    function toggleExploreMenu() {
+      document.getElementById("explore-menu").classList.toggle("hidden");
+    }
+    function openAuthModal() {
+      document.getElementById("auth-modal").classList.remove("hidden");
+    }
+    function closeAuthModal() {
+      document.getElementById("auth-modal").classList.add("hidden");
+    }
+    function simulateAuth() {
+      alert("Logged in successfully as Maple Future Learner.");
+      closeAuthModal();
+    }
+
+    /* E-Commerce Cart Logic */
+    function toggleCartDrawer() {
+      document.getElementById("cart-drawer").classList.toggle("hidden");
+    }
+
+    function addToCart(courseId) {
+      const course = COURSES.find(c => c.id === courseId);
+      if(course && !cart.some(item => item.id === courseId)) {
+        cart.push(course);
+        updateCartUI();
+        renderCourses();
+      }
+    }
+
+    function removeFromCart(courseId) {
+      cart = cart.filter(item => item.id !== courseId);
+      updateCartUI();
+      renderCourses();
+    }
+
+    function applyPromo() {
+      const code = document.getElementById("promo-input").value.trim().toUpperCase();
+      if(code === 'MAPLE10') {
+        appliedPromo = true;
+        alert("Promo MAPLE10 applied: 10% discount!");
+      } else {
+        alert("Invalid Promo Code. Try MAPLE10.");
+      }
+      updateCartUI();
+    }
+
+    function updateCartUI() {
+      // Badge
+      document.getElementById("cart-count-badge").innerText = cart.length;
+
+      // Cart Items
+      const container = document.getElementById("cart-items-container");
+      if(cart.length === 0) {
+        container.innerHTML = `
+          <div class="text-center py-12 text-slate-400 space-y-2">
+            <svg class="w-12 h-12 mx-auto text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+            <p class="text-sm font-semibold">Your cart is empty.</p>
+            <p class="text-xs text-slate-400">Explore courses and add them to enroll.</p>
+          </div>
+        `;
+      } else {
+        container.innerHTML = cart.map(item => `
+          <div class="p-3 bg-slate-50 border border-slate-200 rounded-lg flex items-center justify-between gap-3">
+            <div class="space-y-0.5">
+              <h5 class="text-xs font-bold text-navy-900 line-clamp-1">${item.title}</h5>
+              <div class="text-[10px] text-slate-500">${item.institution}</div>
+              <div class="text-xs font-bold text-maple-600">$${item.price} CAD</div>
+            </div>
+            <button onclick="removeFromCart('${item.id}')" class="text-slate-400 hover:text-rose-600 text-sm font-bold">&times;</button>
+          </div>
+        `).join('');
+      }
+
+      // Financial Calculation
+      const subtotal = cart.reduce((acc, curr) => acc + curr.price, 0);
+      const discount = appliedPromo ? subtotal * 0.10 : 0;
+      const taxable = subtotal - discount;
+      const tax = taxable * 0.13; // Ontario HST
+      const total = taxable + tax;
+
+      document.getElementById("cart-subtotal").innerText = `$${subtotal.toFixed(2)} CAD`;
+      document.getElementById("cart-tax").innerText = `$${tax.toFixed(2)} CAD`;
+      document.getElementById("cart-discount").innerText = `-$${discount.toFixed(2)} CAD`;
+      document.getElementById("cart-total").innerText = `$${total.toFixed(2)} CAD`;
+    }
+
+    function triggerCheckout() {
+      if(cart.length === 0) {
+        alert("Your cart is empty!");
+        return;
+      }
+      alert("Order placed successfully! Welcome to your Maple Future Institution course portal.");
+      cart = [];
+      appliedPromo = false;
+      updateCartUI();
+      renderCourses();
+      toggleCartDrawer();
+    }
+  </script>
+</body>
+</html>
